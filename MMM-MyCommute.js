@@ -287,14 +287,14 @@ Module.register("MMM-MyCommute", {
 			if (destinationGetInfo.length > 0) {
 				this.sendSocketNotification("GOOGLE_TRAFFIC_GET", {destinations: destinationGetInfo, instanceId: this.identifier});
 			} else {
-				this.hide(1000, null, {lockString: this.identifier});
+				this.hide(1000, function () {}, {lockString: this.identifier});
 				this.inWindow = false;
 				this.isHidden = true;
 			}
 
 			this.lastUpdate = new Date();
 		} else {
-			this.hide(1000, null, {lockString: this.identifier});
+			this.hide(1000, function () {}, {lockString: this.identifier});
 			this.inWindow = false;
 			this.isHidden = true;
 		}
@@ -582,7 +582,7 @@ Module.register("MMM-MyCommute", {
 
 	notificationReceived: function(notification, payload) {
 		if (notification === "DOM_OBJECTS_CREATED" && !this.inWindow) {
-			this.hide(0, null, { lockString: this.identifier });
+			this.hide(0, function () {}, { lockString: this.identifier });
 			this.isHidden = true;
 		} else if (notification === "CALENDAR_EVENTS") {
 			this.setAppointmentDestinations(payload);
