@@ -287,14 +287,14 @@ Module.register("MMM-MyCommute", {
 			if (destinationGetInfo.length > 0) {
 				this.sendSocketNotification("GOOGLE_TRAFFIC_GET", {destinations: destinationGetInfo, instanceId: this.identifier});
 			} else {
-				this.hide(1000, {lockString: this.identifier});
+				this.hide(1000, null, {lockString: this.identifier});
 				this.inWindow = false;
 				this.isHidden = true;
 			}
 
 			this.lastUpdate = new Date();
 		} else {
-			this.hide(1000, {lockString: this.identifier});
+			this.hide(1000, null, {lockString: this.identifier});
 			this.inWindow = false;
 			this.isHidden = true;
 		}
@@ -446,8 +446,8 @@ Module.register("MMM-MyCommute", {
 		var headerTitle = this.data.header;
 
 		if(this.config.showUpdated && this.config.showUpdatedPosition === "header") {
-			headerTitle += " - " + this.translate("LAST_REFRESHED") 
-			
+			headerTitle += " - " + this.translate("LAST_REFRESHED")
+
 			if(this.lastUpdated){
 				headerTitle += this.lastUpdated.format("HH:mm");
 			} else {
@@ -493,7 +493,7 @@ Module.register("MMM-MyCommute", {
 			if (p.error) {
 				if(!this.config.showError){
 					return this.lastWrapper;
-				} 
+				}
 
 				//no routes available.	display an error instead.
 				const errorTxt = document.createElement("span");
@@ -582,7 +582,7 @@ Module.register("MMM-MyCommute", {
 
 	notificationReceived: function(notification, payload) {
 		if (notification === "DOM_OBJECTS_CREATED" && !this.inWindow) {
-			this.hide(0, { lockString: this.identifier });
+			this.hide(0, null, { lockString: this.identifier });
 			this.isHidden = true;
 		} else if (notification === "CALENDAR_EVENTS") {
 			this.setAppointmentDestinations(payload);
